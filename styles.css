@@ -1,0 +1,126 @@
+body{
+    background-color:lightseagreen;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.h1{
+    text-align: center;
+}
+
+.pizza {
+    /* box-model */
+    border: 5px solid;
+    padding: 1em;
+    margin: 1em;
+    margin-bottom: 0.5em;
+    border-radius: 1em;
+
+    display: flex;
+    flex-direction: column
+   
+}
+
+.small-pizza{
+    background-color: palevioletred;
+    flex: 1;
+    text-align: left;
+}
+
+.medium-pizza{
+    background-color: orange;
+    flex: 1;
+    text-align: left;
+}
+
+.large-pizza{
+    background-color: orangered;
+    flex: 1;
+    text-align: left;
+}
+
+/*  large devices 1200px
+    laptops 992px
+    tablets 768px
+    phones (potrait) 576px*/
+@media (min-width: 960px) {
+    .pizzas{
+        display: flex;
+    }     
+
+    .box {
+        display: inline-block;
+        width: 100%;
+        height: 100px;  
+    }
+
+    /* .box:first-child {
+        background-color: blue;
+    } */
+        
+    .box:last-child {
+        /* background-color: red; */
+        text-align: right;
+    }
+}
+
+@media (min-width: 768px) {
+    .pizzas{
+        display: flex;
+    } 
+
+    .box {
+        display: inline-block;
+        width: 100%;
+        height: 100px;  
+    }
+
+    /* .box:first-child {
+        background-color: blue;
+    } */
+        
+    .box:last-child {
+        /* background-color: red; */
+        text-align: right;
+    }
+}
+
+@media (min-width: 576px) {
+    .pizzas{
+        display: flex;
+    } 
+
+    .box {
+        display: inline-block;
+        width: 100%;
+        height: 100px;  
+    }
+
+    /* .box:first-child {
+        background-color: blue;
+    } */
+
+    .box:last-child {
+        /* background-color: red; */
+        text-align: center;
+    }
+}
+
+.contact-details{
+    background-color: yellow;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shopping-cart{
+    background-color: yellow;
+    text-align: center;
+}
+
+.display {
+    display: inline-block;
+}
+
+.button-size{
+    font-size: 20px;
+    padding: 10px 40px;
+}
