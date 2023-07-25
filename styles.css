@@ -1,6 +1,11 @@
 body{
-    background-color:lightseagreen;
     font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: lightseagreen;
 }
 
 .h1{
@@ -123,4 +128,55 @@ body{
 .button-size{
     font-size: 20px;
     padding: 10px 40px;
+}
+
+.checkout-container {
+    display: flex;
+    justify-content: center;
+}
+
+.checkout-btn, .pay-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+  /* Responsive styles for smaller screens */
+    @media (max-width: 768px) {
+    .checkout-btn, .pay-btn {
+        font-size: 14px;
+    }
+}
+
+.cart{
+    background-color: #f1c40f;
+    text-align: center;
+}
+
+#menu-container{
+    width: 900px;
+    margin: 0 auto;
+    align-items: center;
+}
+.menu1, .menu2, .menu3{
+    width: 280px;
+    float: left;
+    margin: 10px;
+}
+
+.menu1{
+    background-color: #d35400;
+}
+
+.menu2{
+    background-color:#f39c12 ;
+}
+
+.menu3{
+    background-color:#e84393 ;
+}
+
+footer {
+    padding: 20px;
+    margin-top: auto; /* Pushes the footer to the bottom */
 }
