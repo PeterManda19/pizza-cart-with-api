@@ -18,6 +18,8 @@
         <div class="shopping-cart">
             <h2>Shopping Cart</h2>
 
+            <p x-text="message" class="error-message"></p>
+
             <div x-show="cart.length === 0">
                 <p>Your cart is empty.</p>
                 <div>

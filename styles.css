@@ -130,6 +130,10 @@ body{
     padding: 10px 40px;
 }
 
+.error-message {
+    color: red;
+  }
+
 footer {
     padding: 25px;
     margin-top: auto; /* Pushes the footer to the bottom */
