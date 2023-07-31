@@ -1,25 +1,25 @@
-const cartComponent = function() {
-  const init = function() {
-    const url = `https://pizza-api.projectcodex.net/api/pizzas`;
-
-    axios.get(url).then((result) => {
-      const pizzas = result.data.pizzas;
-      this.pizzas = pizzas;
-    });
-
-    this.loadCartFromLocalStorage();
-  };
+const cartComponent = () => {
+  const apiUrl = "https://pizza-api.projectcodex.net/api/pizzas";
+  const localStorageKey = "perfectPizzaCart";
 
   return {
     cart: [],
     showPayButton: false,
     paymentAmount: 0.00,
     isPaymentValid: true,
-    localStorageKey: "perfectPizzaCart",
     pizzas: [],
     message: '',
 
-    init,
+    init() {
+      axios.get(apiUrl).then((result) => {
+        const allPizzas = result.data.pizzas;
+        this.pizzas = allPizzas.filter(pizza =>
+          pizza.size === 'small' || pizza.size === 'medium' || pizza.size === 'large'
+        );
+      });
+
+      this.loadCartFromLocalStorage();
+    },
 
     addToCart(pizzaName, pizzaPrice) {
       if (!this.showPayButton) {
@@ -68,8 +68,7 @@ const cartComponent = function() {
       }
 
       let total = 0;
-      for (let i = 0; i < this.cart.length; i++) {
-        const pizza = this.cart[i];
+      for (const pizza of this.cart) {
         total += pizza.price * pizza.quantity;
       }
       return total.toFixed(2);
@@ -103,15 +102,39 @@ const cartComponent = function() {
     },
 
     saveCartToLocalStorage() {
-      localStorage.setItem(this.localStorageKey, JSON.stringify(this.cart));
+      localStorage.setItem(localStorageKey, JSON.stringify(this.cart));
     },
 
     loadCartFromLocalStorage() {
-      const cartData = localStorage.getItem(this.localStorageKey);
+      const cartData = localStorage.getItem(localStorageKey);
       if (cartData) {
         this.cart = JSON.parse(cartData);
       }
     },
+    
+    pizzas: [
+      {
+        id: 1,
+        name: "Small Pizza",
+        price: 47.90,
+        size: "small",
+        description: "Delicious small pizza for one person.",
+      },
+      {
+        id: 2,
+        name: "Medium Pizza",
+        price: 79.90,
+        size: "medium",
+        description: "Perfect medium pizza for a group.",
+      },
+      {
+        id: 3,
+        name: "Large Pizza",
+        price: 114.90,
+        size: "large",
+        description: "Extra-large pizza for a big party.",
+      },
+    ],
 
     validatePayment() {
       const paymentAmount = parseFloat(this.paymentAmount);
@@ -123,10 +146,30 @@ const cartComponent = function() {
       if (this.paymentAmount >= this.calculateTotal()) {
         this.message = "Enjoy your pizzas!";
         this.cart = [];
-        this.paymentAmount = 0;
+        this.showPayButton = false;
+        this.paymentAmount = 0.00;
+        this.saveCartToLocalStorage();
       } else {
-        this.message = "Sorry - that is not enough money!";
+        this.message = "Sorry, the payment amount is not sufficient.";
       }
-    }
+    },
   };
 };
+
+const cart = cartComponent();
+cart.init();
+
+// Function to get pizza image URL based on size
+function getPizzaImage(size) {
+  const imageUrls = {
+    small: "asserts/small.png",
+    medium: "asserts/medium.png",
+    large: "asserts/large.png",
+  };
+
+  return imageUrls[size] || "pizza4.png";
+}
+
+// Example usage:
+//cart.addToCart("Pepperoni Pizza", 0.00);
+console.log(cart.calculateTotal());
